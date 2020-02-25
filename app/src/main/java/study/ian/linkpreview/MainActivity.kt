@@ -10,6 +10,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        "https://www.youtube.com/watch?v=b8HVQtIoBYU".getHtml()
+        val result = "https://www.youtube.com/watch?v=b8HVQtIoBYU".getHtml()
     }
 }
