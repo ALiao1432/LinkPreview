@@ -1,8 +1,12 @@
 package study.ian.linkpreview
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import study.ian.linkpreviewer.getHtml
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import study.ian.linkpreviewer.getOpenGraph
 
 class MainActivity : AppCompatActivity() {
 
@@ -10,6 +14,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val result = "https://www.youtube.com/watch?v=b8HVQtIoBYU".getHtml()
+        getTestDocument()
+    }
+
+    private fun getTestDocument() = runBlocking {
+        launch {
+            val result = "https://www.youtube.com/watch?v=b8HVQtIoBYU".getOpenGraph()
+            result?.let {
+                textView.text = "${it.isValid()}"
+            }
+        }
     }
 }
