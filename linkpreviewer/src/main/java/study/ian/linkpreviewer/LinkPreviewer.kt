@@ -6,14 +6,48 @@ import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Attributes
 import org.jsoup.nodes.Document
-import java.lang.IllegalArgumentException
 
-suspend fun String.getOpenGraph(): OpenGraph? {
+interface OnOpenGraphCompleteListener {
+    fun onOpenGraphComplete(openGraph: OpenGraph?)
+    fun onOpenGraphError(e: java.lang.Exception)
+}
+
+fun String.getOpenGraphByThread(listener: OnOpenGraphCompleteListener) {
+    Thread {
+        lateinit var document: Document
+
+        try {
+            document = Jsoup.connect(this).get()
+            val cssSelector = "* > meta"
+            val metaElements = document.select(cssSelector)
+
+            val contentKey = "content"
+            val openGraph = OpenGraph()
+            metaElements.map {
+                it.attributes()
+            }
+                .forEach { attr ->
+                    val type = attr.containOpenGraphAttributeType()
+                    type?.let {
+                        val key = attr.get(type.attrType)
+                        val value = attr.get(contentKey)
+                        openGraph.openGraphContentMap.putIfAbsent(key, value)
+                    }
+                }
+            listener.onOpenGraphComplete(openGraph)
+        } catch (e: Exception) {
+            Log.e("get open graph object error", e.message, e)
+            listener.onOpenGraphError(e)
+        }
+    }.start()
+}
+
+suspend fun String.getOpenGraphByCoroutine(): OpenGraph? {
     return withContext(Dispatchers.IO) {
         lateinit var document: Document
 
         try {
-            document = Jsoup.connect(this@getOpenGraph).get()
+            document = Jsoup.connect(this@getOpenGraphByCoroutine).get()
         } catch (e: IllegalArgumentException) {
             Log.e("get open graph object error", e.message, e)
             return@withContext null

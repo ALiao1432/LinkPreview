@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="og_holder_main_layout_padding">6dp</dimen>
+    <dimen name="og_holder_title">16sp</dimen>
+    <dimen name="og_holder_description">12sp</dimen>
+    <dimen name="og_holder_url">12sp</dimen>
+    <dimen name="oh_holder_item_margin">8dp</dimen>
+    <dimen name="oh_holder_text_padding">4dp</dimen>
+</resources>

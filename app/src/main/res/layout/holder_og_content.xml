@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#efefef"
+        android:padding="@dimen/og_holder_main_layout_padding">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <ImageView
+            android:id="@+id/ogImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ogTitleText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/oh_holder_item_margin"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="@dimen/oh_holder_text_padding"
+            android:textSize="@dimen/og_holder_title"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/ogDescriptionText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/ogImage"
+            app:layout_constraintTop_toTopOf="@id/ogImage"
+            tools:text="MATZKA樂團【水災 】 官方完整版Official HD MV" />
+
+        <TextView
+            android:id="@+id/ogDescriptionText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:padding="@dimen/oh_holder_text_padding"
+            android:textSize="@dimen/og_holder_description"
+            app:layout_constraintBottom_toTopOf="@id/ogUrlText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/ogTitleText"
+            app:layout_constraintTop_toBottomOf="@id/ogTitleText"
+            tools:text="MATZKA樂團 -(089)專輯最新單曲[水災] 每首歌曲都有他獨特的靈魂，在(089)專輯裡，收藏了Matzka由生活體驗中，細細品味轉化的悲喜音綠，無關討好、或是迎合，送給擁有獨特靈魂的我們。 MATZKA [Water Disaster] Official HD MV 詞lyrics/ 曲Song：宋唯農..." />
+
+        <TextView
+            android:id="@+id/ogUrlText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/oh_holder_text_padding"
+            android:singleLine="true"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="@dimen/og_holder_url"
+            app:layout_constraintBottom_toBottomOf="@id/ogImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/ogTitleText"
+            app:layout_constraintTop_toBottomOf="@id/ogDescriptionText"
+            tools:text="https://www.youtube.com/watch?v=Bj6hDRIdlC4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
