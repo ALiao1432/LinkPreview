@@ -13,6 +13,8 @@ interface OnOpenGraphCompleteListener {
 }
 
 fun String.getOpenGraphByThread(listener: OnOpenGraphCompleteListener) {
+    // https://youtu.be/9ubtCpn1MbE
+
     Thread {
         lateinit var document: Document
 
@@ -23,9 +25,7 @@ fun String.getOpenGraphByThread(listener: OnOpenGraphCompleteListener) {
 
             val contentKey = "content"
             val openGraph = OpenGraph()
-            metaElements.map {
-                it.attributes()
-            }
+            metaElements.map { it.attributes() }
                 .forEach { attr ->
                     val type = attr.containOpenGraphAttributeType()
                     type?.let {
@@ -40,6 +40,16 @@ fun String.getOpenGraphByThread(listener: OnOpenGraphCompleteListener) {
             listener.onOpenGraphError(e)
         }
     }.start()
+}
+
+private fun Attributes.containOpenGraphAttributeType(): OpenGraph.AttributeType? {
+    val types = OpenGraph.AttributeType.values()
+    types.forEach {
+        if (this.hasKey(it.attrType)) {
+            return it
+        }
+    }
+    return null
 }
 
 suspend fun String.getOpenGraphByCoroutine(): OpenGraph? {
@@ -69,14 +79,4 @@ suspend fun String.getOpenGraphByCoroutine(): OpenGraph? {
             }
         openGraph
     }
-}
-
-private fun Attributes.containOpenGraphAttributeType(): OpenGraph.AttributeType? {
-    val types = OpenGraph.AttributeType.values()
-    types.forEach {
-        if (this.hasKey(it.attrType)) {
-            return it
-        }
-    }
-    return null
 }
